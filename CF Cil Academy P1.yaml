@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance with an S3 bucket and IAM Role for SSM access
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+
+  MyEC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - Ref: MyEC2Role
+
+  MyEC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: SSM-EC2-Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+          arn:aws:iam::aws:policy/AmazonS3FullAccess
+      Policies:
+        - PolicyName: SSM-StartSession-Policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "ssm:StartSession"
+                Resource: "arn:aws:ec2:us-east-1:201431995425:instance/ami-01c647eace872fc02"
+        
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-01c647eace872fc02  # Amazon Linux 2 AMI
+      IamInstanceProfile: !Ref MyEC2InstanceProfile
+
+Outputs:
+  InstanceId:
+    Description: Instance ID of the created EC2 instance
+    Value: !Ref MyEC2Instance
+
+  S3BucketName:
+    Description: Name of the created S3 bucket
+    Value: !Ref MyS3Bucket
+
+
+
+ami-01c647eace872fc02
