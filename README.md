@@ -1,6 +1,7 @@
 # Cil-Academy
 
 ## Description
+## Project
 I created an EC2 instance and an S3 bucket using a cloud formation stack giving a role to only SSM into my EC2 with other permission too.
 I SSM into the EC2 and copy the content into my directory called **mys3backup**
 I wrote a python scrpit to copy the **BUCKET** content to my directory on execution.
