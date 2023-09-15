@@ -40,13 +40,13 @@ Resources:
               - Effect: Allow
                 Action:
                   - "ssm:StartSession"
-                Resource: "arn:aws:ec2:us-east-1:201431995425:instance/ami-01c637eawe872fc03"
+                Resource: "arn:aws:ec2:us-east-1:201431995425:instance/04cb4ca688797756f"
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-01c649eacm872fc06  # Amazon Linux 2 AMI
+      ImageId: ami-04cb4ca688797756f
       IamInstanceProfile: !Ref MyEC2InstanceProfile
 
 Outputs:
@@ -57,7 +57,6 @@ Outputs:
   S3BucketName:
     Description: Name of the created S3 bucket
     Value: !Ref MyS3Bucket
-
 
     
   
