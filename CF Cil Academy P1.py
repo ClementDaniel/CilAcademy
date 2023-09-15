@@ -28,5 +28,4 @@ def backup_s3_bucket():
     except Exception as e:
         print(f"Error: {str(e)}")
 
-if __name__ == "__main__":
-    backup_s3_bucket()
+
