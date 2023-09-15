@@ -5,7 +5,7 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: cecurevm1
+      BucketName: cecurebin1
 
   MyEC2InstanceProfile:
     Type: AWS::IAM::InstanceProfile
