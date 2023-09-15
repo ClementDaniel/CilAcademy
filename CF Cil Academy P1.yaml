@@ -4,6 +4,8 @@ Description: Create an EC2 instance with an S3 bucket and IAM Role for SSM acces
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
+    Properties:
+      BucketName: cecurevm1
 
   MyEC2InstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -19,6 +21,9 @@ Resources:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
+            Action:
+               - ssm:*
+               - s3:*
             Principal:
               Service:
                 - ec2.amazonaws.com
@@ -26,7 +31,7 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
-          arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
       Policies:
         - PolicyName: SSM-StartSession-Policy
           PolicyDocument:
@@ -36,7 +41,7 @@ Resources:
                 Action:
                   - "ssm:StartSession"
                 Resource: "arn:aws:ec2:us-east-1:201431995425:instance/ami-01c637eawe872fc03"
-        
+
   MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
@@ -54,4 +59,5 @@ Outputs:
     Value: !Ref MyS3Bucket
 
 
-
+    
+  
