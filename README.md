@@ -4,7 +4,7 @@
 ## Project
 I created an EC2 instance and an S3 bucket using a cloud formation stack giving a role to only SSM into my EC2 with other permission too.
 I SSM into the EC2 and copy the content into my directory called **mys3backup**
-I wrote a python scrpit to copy the **BUCKET** content to my directory on execution.
+I wrote a python script to copy the **BUCKET** content to my directory on execution.
 
 ### EC2
 Amazon Elastic Compute Cloud (Amazon EC2) provides on-demand, scalable computing capacity in the Amazon Web Services (AWS) Cloud. Using Amazon EC2 reduces hardware costs so you can develop and deploy applications faster. You can use Amazon EC2 to launch as many or as few virtual servers as you need, configure security and networking, and manage storage. You can add capacity (scale up) to handle compute-heavy tasks, such as monthly or yearly processes, or spikes in website traffic. When usage decreases, you can reduce capacity (scale down) again.
